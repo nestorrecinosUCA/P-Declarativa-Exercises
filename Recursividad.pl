@@ -46,9 +46,9 @@ sumar_intervalo(A, B, _):-
   !,
   fail.
 
-sumar_intervalo(A, B, Suma):- 
-  =:=(A, B),
-  is(Suma, B),
+sumar_intervalo(B, B, B):- 
+  %=:=(A, B),
+  %is(Suma, B),
   !.
 
 sumar_intervalo(A, B, Suma):-
