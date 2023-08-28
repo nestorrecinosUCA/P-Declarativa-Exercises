@@ -1,3 +1,19 @@
+% Gender
+gender(josefina, f).
+gender(ligia, f).
+gender(silvia, f).
+gender(marina, f).
+gender(regina, f).
+gender(jacinta, f).
+gender(marlene, f).
+
+gender(mario, m).
+gender(jaime, m).
+gender(carlos, m).
+gender(julio, m).
+gender(manuel, m).
+gender(irvin, m).
+
 % Madres
 mother(josefina, mario).
 mother(josefina, ligia).
@@ -40,23 +56,39 @@ grandparents(X,Y) :- grandfather(X,Y).
 grandparents(X,Y) :- grandmother(X,Y).
 
 % hermanos:
-sibling(X, Y):-
+brother(X, Y):-
+  gender(X, m),
   father(P, X),
   father(P, Y),
   mother(M, X),
   mother(M, Y),
-  X \= Y.
+  \==(X, Y).
+
+sister(X, Y):-
+  gender(X, f),
+  father(P, X),
+  father(P, Y),
+  mother(M, X),
+  mother(M, Y),
+  \==(X, Y).
 
 % HACER CLAUSULAS PARA PRIMOS, HERMANOS, TIOS, ETC
-uncles(X, Y):-
-  father(P, Y),
-  sibling(X, P).
+uncle(X, Y):-
+( father(P, Y) ; mother(P, Y)),
+  brother(X, P).
 
-uncles(X, Y):-
-  mother(M, Y),
-  sibling(X, M).
+aunt(X, Y):-
+  ( father(M, Y) ; mother(M, Y)),
+  sister(X, M).
 
 cousins(X, Y):-
   ( mother(M, X) ; father(M, X)),
   ( mother(P, Y) ; father(P, Y)),
-  sibling(M, P).
+  ( brother(M, P) ; sister(M, P)).
+
+% algo(este).
+% algo(aquel).
+
+% prueba(X):-
+    % !, algo(X).
+
