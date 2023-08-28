@@ -14,6 +14,9 @@ contarN(X, N):-
   contarN(Xsig, N).
 
 % Factorial
+factorial(N):-
+  factorial(N, 1).
+
 factorial(N, _):-
   =:=(N,0),
   writeln(1),
