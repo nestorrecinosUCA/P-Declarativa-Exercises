@@ -55,4 +55,8 @@ uncles(X, Y):-
 uncles(X, Y):-
   mother(M, Y),
   sibling(X, M).
-  %father(P, Y),
+
+cousins(X, Y):-
+  ( mother(M, X) ; father(M, X)),
+  ( mother(P, Y) ; father(P, Y)),
+  sibling(M, P).
