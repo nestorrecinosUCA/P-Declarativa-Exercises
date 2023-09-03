@@ -91,4 +91,60 @@ cousins(X, Y):-
 
 % prueba(X):-
     % !, algo(X).
+% Antepasados
+antepasado(X, Y):-
+  father(X, Y), !.
 
+antepasado(X, Y):-
+  mother(X, Y), !.
+
+antepasado(X, Y):-
+  father(P, Y),
+  antepasado(X, P).
+
+antepasado(X, Y):-
+  mother(P, Y),
+  antepasado(X, P).
+
+% Show  antepasados lines from a person:
+antepasados_line(X):-
+  \+ father(_, X),
+  writeln('---'),
+  !.
+
+antepasados_line(X):-
+  \+ mother(_, X),
+  writeln('---'),
+  !.
+
+
+antepasados_line(X):-
+  father(P, X),
+  antepasados_line(P),
+  writeln(P).
+
+antepasados_line(X):-
+  mother(P, X),
+  antepasados_line(P),
+  writeln(P).
+
+% Show descendientes lines from a person>
+descendientes_line(X):-
+  father(X, H),
+  descendientes_line(H),
+  writeln(H).
+
+descendientes_line(X):-
+  mother(X, H),
+  descendientes_line(H),
+  writeln(H).
+
+descendientes_line(X):-
+  \+ father(X, _),
+  writeln('---'),
+  !.
+
+descendientes_line(X):-
+  \+ mother(X, _),
+  writeln('---'),
+  !.
